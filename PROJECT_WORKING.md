@@ -1,47 +1,7 @@
+# GoVaultFS Project Documentation
 
-# GoVaultFS: Distributed Peer-to-Peer Content-Addressable File System in Go
-
-GoVaultFS is a **distributed, peer-to-peer (P2P) file storage system** built in Go. It implements a content-addressable storage (CAS) model with encryption, where files are stored across multiple nodes in a decentralized network, identified by their cryptographic hash rather than traditional file paths. The project demonstrates advanced distributed systems, custom networking, and cryptography—all from scratch.
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-  - [Peer-to-Peer Transport Layer](#peer-to-peer-transport-layer)
-  - [Content-Addressable Storage](#content-addressable-storage)
-  - [File Server Architecture](#file-server-architecture)
-  - [Encryption and Security](#encryption-and-security)
-- [How It Works](#how-it-works)
-  - [File Storage Process](#file-storage-process)
-  - [File Retrieval Process](#file-retrieval-process)
-<!-- - [Installation](#installation) -->
-- [Usage](#usage)
-- [Technical Implementation](#technical-implementation)
-- [Learning Outcomes](#learning-outcomes)
-- [Real-World Applications](#real-world-applications)
-- [Contributing](#contributing)
-- [License](#license)
-
-
-## Overview
-
-GoVaultFS is a content-addressable storage (CAS) system with a fully decentralized, peer-to-peer architecture. Files are stored and retrieved based on their content hash (SHA-1), not by path or filename. There is no central server; all nodes are equal peers, and files are automatically deduplicated and encrypted before storage and network transfer.
-
-
-## Key Features
-
-- **True P2P Architecture**: No central server, fully distributed
-- **Content-Addressable Storage**: Files identified by SHA-1 hash
-- **Automatic Deduplication**: Identical files share storage space
-- **AES Encryption**: Secure file storage and transmission
-- **Fault Tolerance**: File replication across multiple nodes
-- **Custom TCP Protocol**: Built-from-scratch networking layer
-- **Concurrent Operations**: Parallel file and network operations
-- **Dynamic Peer Discovery**: Bootstrap nodes help new peers join
-- **Data Integrity**: Cryptographic hashes ensure file integrity
-- **Efficient Network Usage**: Content-based addressing minimizes duplicate transfers
-
+## Project Overview
+GoVaultFS is a **distributed peer-to-peer (P2P) file storage system** built in Go that implements content-addressable storage (CAS) with encryption. It creates a decentralized network where files are stored across multiple nodes without a central server, identified by their cryptographic hash rather than traditional file paths.
 
 ## Project Structure
 ```
@@ -62,7 +22,16 @@ GoVaultFS/
 ├── Makefile               # Build automation
 ├── README.md              # Project documentation
 └── *_test.go              # Test files
+
 ```
+
+## Key Features
+- **True P2P Architecture**: No central server, fully distributed
+- **Content-Addressable Storage**: Files identified by SHA-1 hash
+- **Automatic Deduplication**: Identical files share storage space
+- **AES Encryption**: Secure file storage and transmission
+- **Fault Tolerance**: File replication across multiple nodes
+- **Custom TCP Protocol**: Built-from-scratch networking layer
 
 ## Core Components
 
@@ -89,7 +58,6 @@ GoVaultFS/
 - **Key Generation**: Secure random key generation for each node
 - **Streaming Encryption**: Efficient encryption for large files
 - **ID Generation**: Unique node identifier generation
-
 
 ## How The System Works
 
@@ -122,8 +90,6 @@ GoVaultFS/
 - Directory structure: `{nodeID}/{hash_part1}/{hash_part2}/.../{full_hash}`
 - Example path: `port5000_network/d44bb/d0bbd/a685d/d44bbd0bbda685d5db90f419568b531ab9afa97b`
 
-defer reader.Close()
-
 ## Network Protocol
 
 ### Message Types
@@ -137,7 +103,6 @@ defer reader.Close()
 3. **Message Exchange**: Send/receive file storage and retrieval requests
 4. **Stream Handling**: Manage concurrent file transfers
 5. **Connection Cleanup**: Proper connection termination
-
 
 ## Technical Implementation
 
@@ -171,7 +136,6 @@ type PathKey struct {
     Filename string // Full hash filename
 }
 ```
-
 
 ## Build and Run
 ```bash
@@ -269,50 +233,3 @@ Similar systems are used in:
 - Database integration for metadata
 - Authentication and access control
 - Network topology optimization
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Guidelines
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the CC0-1.0 License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## Development
-
-### Windows Setup
-
-This project uses a Makefile for build automation. On Windows, you'll need to install GNU Make:
-
-```powershell
-winget install GnuWin32.Make
-```
-
-After installation, run the setup script to add make to your PATH:
-
-```powershell
-.\setup-make.ps1
-```
-
-### Available Commands
-
-- `make build` - Build the application
-- `make run` - Build and run the application
-- `make test` - Run tests
-
-### Alternative (PowerShell Scripts)
-
-If you prefer not to use make, PowerShell scripts are also available:
-
-- `.\build.ps1` - Build the application
-- `.\run.ps1` - Build and run the application
-- `.\test.ps1` - Run tests
