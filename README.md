@@ -1,6 +1,14 @@
 
 # GoVaultFS: Distributed Peer-to-Peer Content-Addressable File System in Go
 
+[![Go](https://img.shields.io/badge/go-red?logo=go&logoColor=#00ADD8)](https://golang.org)
+[![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-orange.svg)](LICENSE)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/AnshSinghSonkhia/go-vault-fs/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue.svg)](https://github.com/AnshSinghSonkhia/go-vault-fs/pulls)
+![Status](https://img.shields.io/badge/status-in_development-lightgrey.svg)
+
+<!-- ![Go](https://img.shields.io/badge/go-1.21-blue.svg) [![Go](https://img.shields.io/badge/go-%20-blue.svg?logo=go&logoColor=white)](https://golang.org) -->
+
 GoVaultFS is a **distributed, peer-to-peer (P2P) file storage system** built in Go. It implements a content-addressable storage (CAS) model with encryption, where files are stored across multiple nodes in a decentralized network, identified by their cryptographic hash rather than traditional file paths. The project demonstrates advanced distributed systems, custom networking, and cryptography—all from scratch.
 
 ## Table of Contents
