@@ -1,3 +1,5 @@
+// Unit tests for the Store (content-addressable storage) in GoVaultFS
+// These tests verify path transformation, file writing, reading, existence checks, and deletion.
 package main
 
 import (
@@ -7,6 +9,9 @@ import (
 	"testing"
 )
 
+// TestPathTransformFunc checks that CASPathTransformFunc correctly transforms a key
+// into the expected hierarchical path and filename using SHA-1 hashing.
+// This ensures content-addressable storage works as designed.
 func TestPathTransformFunc(t *testing.T) {
 	key := "momsbestpicture"
 	pathKey := CASPathTransformFunc(key)
@@ -21,6 +26,9 @@ func TestPathTransformFunc(t *testing.T) {
 	}
 }
 
+// TestStore validates the Store's core functionality:
+// writing, reading, checking existence, and deleting files.
+// It runs multiple iterations to ensure reliability and correctness.
 func TestStore(t *testing.T) {
 	s := newStore()
 	id := generateID()
@@ -30,14 +38,17 @@ func TestStore(t *testing.T) {
 		key := fmt.Sprintf("foo_%d", i)
 		data := []byte("some jpg bytes")
 
+		// Write data to the store
 		if _, err := s.writeStream(id, key, bytes.NewReader(data)); err != nil {
 			t.Error(err)
 		}
 
+		// Check if the file exists
 		if ok := s.Has(id, key); !ok {
 			t.Errorf("expected to have key %s", key)
 		}
 
+		// Read the file and verify its contents
 		_, r, err := s.Read(id, key)
 		if err != nil {
 			t.Error(err)
@@ -48,16 +59,20 @@ func TestStore(t *testing.T) {
 			t.Errorf("want %s have %s", data, b)
 		}
 
+		// Delete the file
 		if err := s.Delete(id, key); err != nil {
 			t.Error(err)
 		}
 
+		// Ensure the file no longer exists
 		if ok := s.Has(id, key); ok {
 			t.Errorf("expected to NOT have key %s", key)
 		}
 	}
 }
 
+// newStore creates a new Store instance with CAS path transformation.
+// Used for test setup.
 func newStore() *Store {
 	opts := StoreOpts{
 		PathTransformFunc: CASPathTransformFunc,
@@ -65,6 +80,8 @@ func newStore() *Store {
 	return NewStore(opts)
 }
 
+// teardown cleans up the store after each test by clearing all files.
+// Ensures test isolation and prevents leftover data between tests.
 func teardown(t *testing.T, s *Store) {
 	if err := s.Clear(); err != nil {
 		t.Error(err)
