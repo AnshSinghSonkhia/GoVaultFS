@@ -490,17 +490,17 @@ Improve usability with configuration management and CLI tools:
 1. **Phase 1 (Core Features)**
    - REST API Server (#1)
    - File Metadata & Versioning (#2)
-   - Configuration Management (#10)
+   - Configuration Management (#11)
 
 2. **Phase 2 (Network Improvements)**
    - Dynamic Peer Discovery (#3)
-   - Network Health Monitoring (#9)
+   - Network Health Monitoring (#10)
    - Logging and Monitoring (#4)
 
 3. **Phase 3 (User Experience)**
    - Web UI (#6)
-   - File Streaming (#8)
-   - Access Control (#7)
+   - File Streaming (#9)
+   - Access Control (#8)
 
 4. **Phase 4 (Optimization)**
    - Deduplication & Compression (#5)
